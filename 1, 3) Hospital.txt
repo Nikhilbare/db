@@ -1,0 +1,60 @@
+-- Design Hospital database with at least 3 entities and relationships between them.
+-- Draw suitable ER/EER diagram for the system and implement using DDL statements.
+                                    -- or
+-- Design Hospital database with at least 3 entities and relationships between them.
+-- Draw suitable ER/EER diagram for the system and Create Table with
+-- primary key and foreign key constraints. a. Alter table with add n modify b. Drop table.
+
+create database hospital2;
+use hospital2;
+
+CREATE TABLE Patients (
+	p_id INT PRIMARY KEY, 
+	p_name VARCHAR(20),
+	dob DATE,
+	gender VARCHAR(6),
+	phone VARCHAR(10),
+	address VARCHAR(30)
+    );
+    
+insert into Patients value(8,'Nikhil','2003-01-28','male','7588012884','pune','barenikhil52gmail.com');
+insert into Patients value(9,'Bhakti','2002-12-23','female','7588012887','nashik','bhaktishirsat2312@gmail.com');
+delete from patients where p_id=9;
+update patients set p_id=4 where p_id= 8;
+
+CREATE TABLE Doctors (
+    d_id INT PRIMARY KEY,
+    d_name VARCHAR(100),
+    specialization VARCHAR(100),
+    phone VARCHAR(20),
+    address VARCHAR(30)
+);
+
+CREATE TABLE Appointments (
+    ap_id INT PRIMARY KEY,
+    p_id INT,
+    d_id INT,
+    ap_date DATE,
+    ap_time TIME,
+    FOREIGN KEY (p_id) REFERENCES Patients(p_id),
+    FOREIGN KEY (d_id) REFERENCES Doctors(d_id)
+);
+
+select *from patients;
+select *from p_appointments;
+select *from doctors;
+
+ALTER TABLE Patients
+ADD email VARCHAR(30);
+
+RENAME table Appointments TO p_Appointments;
+
+ALTER TABLE Patients
+MODIFY phone VARCHAR(30);
+
+TRUNCATE TABLE p_Appointments;
+
+DESC Patients;
+
+drop table p_Appointments;
+

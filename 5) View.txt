@@ -1,0 +1,44 @@
+-- Execute DDL/DML statements which demonstrate the use of views. 
+-- Update the base table using its corresponding view. 
+-- Also consider restrictions on updatable views and perform view creation from multiple tables.
+
+create database bank;
+use bank;
+
+CREATE TABLE Customers (
+    customer_id INT PRIMARY KEY,
+    customer_name VARCHAR(100),
+    account_number VARCHAR(20)
+);
+
+CREATE TABLE Transactions (
+    t_id INT PRIMARY KEY,
+    account_number VARCHAR(20),
+    t_type VARCHAR(20)
+);
+
+-- view from single table
+CREATE VIEW v1 AS
+SELECT customer_id, customer_name, account_number
+FROM Customers;
+
+select *from v1;
+
+-- Some DDL/DML commands
+ALTER VIEW v1 AS SELECT customer_id, customer_name from Customers;
+INSERT INTO v1 (customer_id, customer_name) VALUES (85, 'Nikhil');
+INSERT INTO v1 (customer_id, customer_name) VALUES (32, 'Bare');
+
+-- Updating view
+UPDATE v1 SET customer_id = 100 WHERE customer_id = 85;
+
+DELETE FROM v1 WHERE customer_id = 32;
+drop view v1;
+
+-- view from multiple tables with update restrictions
+CREATE VIEW v2 AS
+SELECT c.customer_id, c.customer_name, t.t_id
+FROM Customers c, Transactions t
+where c.account_number = t.account_number;
+
+drop view v2;
