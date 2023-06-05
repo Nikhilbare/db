@@ -1,0 +1,23 @@
+--group functio
+
+create database groupf;
+use groupf;
+
+create table employee(
+emp_id int,
+name varchar(40),
+age int,
+salary double);
+
+insert into employee(emp_id,name,age,salary) values
+(1,"aadarsh",19,50000),
+(2,"sahil",20,60000),
+(3,"vaibhav",21,65000),
+(4,"suraj",22,70000),
+(5,"bhaves",25,62000);
+
+select max(salary) as maximumsalary from employee;
+select min(salary) as minimumsalary from employee;
+select count(*) as totalemployee from employee;
+select avg(salary) as averagesalary from employee;
+select sum(salary) as totalsalary from employee;
